@@ -18,7 +18,7 @@ export function UserMenu({ session }: Props) {
       <button
         type="button"
         onClick={() => setOpen(!open)}
-        className="flex items-center gap-2 rounded-full overflow-hidden focus:outline-none focus:ring-2 focus:ring-blue-400"
+        className="flex items-center gap-2 overflow-hidden rounded-full border border-sky-100 bg-white/80 p-1 focus:outline-none focus:ring-2 focus:ring-blue-300"
         aria-label="ユーザーメニュー"
       >
         {user?.image ? (
@@ -30,7 +30,7 @@ export function UserMenu({ session }: Props) {
             className="rounded-full"
           />
         ) : (
-          <div className="w-8 h-8 rounded-full bg-blue-500 flex items-center justify-center text-white text-sm font-bold">
+          <div className="flex h-8 w-8 items-center justify-center rounded-full bg-blue-500 text-sm font-bold text-white">
             {user?.name?.[0] ?? "U"}
           </div>
         )}
@@ -43,15 +43,15 @@ export function UserMenu({ session }: Props) {
             onClick={() => setOpen(false)}
             aria-hidden="true"
           />
-          <div className="absolute right-0 top-10 bg-white rounded-xl shadow-lg border border-gray-100 py-2 w-48 z-20">
-            <div className="px-4 py-2 border-b border-gray-100">
+          <div className="absolute right-0 top-12 z-20 w-56 rounded-3xl border border-sky-100 bg-white/95 py-2 shadow-[0_20px_50px_rgba(15,23,42,0.12)] backdrop-blur">
+            <div className="border-b border-sky-50 px-4 py-3">
               <p className="text-sm font-medium text-gray-900 truncate">{user?.name}</p>
               <p className="text-xs text-gray-400 truncate">{user?.email}</p>
             </div>
             <button
               type="button"
               onClick={() => signOut()}
-              className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+              className="w-full px-4 py-3 text-left text-sm font-medium text-gray-700 transition-colors hover:bg-sky-50"
             >
               ログアウト
             </button>

@@ -37,9 +37,10 @@ export async function GET(
 
     return NextResponse.json(detail);
   } catch (err) {
-    console.error(`[/api/places/${placeId}]`, err);
+    const message = err instanceof Error ? err.message : "Unknown error";
+    console.error(`[/api/places/${placeId}]`, message, err);
     return NextResponse.json(
-      { error: "スペース詳細の取得に失敗しました" },
+      { error: `スペース詳細の取得に失敗しました: ${message}` },
       { status: 500 }
     );
   }

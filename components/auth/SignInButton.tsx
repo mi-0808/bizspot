@@ -14,7 +14,7 @@ export function SignInButton({ className, label = "ログイン" }: Props) {
       onClick={() => signIn("google")}
       className={
         className ??
-        "flex items-center gap-2 bg-white border border-gray-300 text-gray-700 px-4 py-2 rounded-xl text-sm font-medium hover:bg-gray-50 transition-colors shadow-sm"
+        "flex items-center gap-2 rounded-2xl border border-sky-100 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-sky-50"
       }
     >
       <svg viewBox="0 0 24 24" className="w-4 h-4">

@@ -37,19 +37,23 @@ const TABS: Tab[] = [
 
 export function BottomNav({ activeTab, onTabChange }: Props) {
   return (
-    <nav className="absolute bottom-0 left-0 right-0 bg-white border-t border-gray-100 z-10 pb-safe">
-      <div className="flex">
+    <nav className="absolute bottom-0 left-0 right-0 z-20 px-5 pb-4 pb-safe">
+      <div className="flex rounded-[30px] border border-sky-100/90 bg-white/98 p-2 shadow-[0_18px_40px_rgba(15,23,42,0.10)] backdrop-blur">
         {TABS.map((tab) => (
           <button
             key={tab.id}
             type="button"
             onClick={() => onTabChange(tab.id)}
-            className={`flex-1 flex flex-col items-center gap-0.5 py-2 transition-colors ${
-              activeTab === tab.id ? "text-blue-600" : "text-gray-400 hover:text-gray-600"
+            className={`flex-1 rounded-3xl px-3.5 py-3 transition-all ${
+              activeTab === tab.id
+                ? "bg-[linear-gradient(180deg,#eff6ff_0%,#dbeafe_100%)] text-blue-700 shadow-sm"
+                : "text-slate-400 hover:text-slate-600"
             }`}
           >
-            {tab.icon}
-            <span className="text-xs">{tab.label}</span>
+            <div className="mx-auto flex w-fit flex-col items-center gap-1">
+              {tab.icon}
+              <span className="text-[11px] font-semibold">{tab.label}</span>
+            </div>
           </button>
         ))}
       </div>

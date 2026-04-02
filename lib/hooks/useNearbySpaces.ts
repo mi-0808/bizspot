@@ -10,7 +10,7 @@ const fetcher = (url: string) =>
   });
 
 export function useNearbySpaces(lat: number | null, lng: number | null, radius = 1500) {
-  const key = lat && lng ? `/api/places/nearby?lat=${lat}&lng=${lng}&radius=${radius}` : null;
+  const key = lat !== null && lng !== null ? `/api/places/nearby?lat=${lat}&lng=${lng}&radius=${radius}` : null;
 
   const { data, error, isLoading, mutate } = useSWR<Space[]>(key, fetcher, {
     revalidateOnFocus: false,

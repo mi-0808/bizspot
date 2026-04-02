@@ -1,24 +1,28 @@
 import type { Metadata, Viewport } from "next";
-import { Geist } from "next/font/google";
-import { SessionProvider } from "next-auth/react";
+import { Plus_Jakarta_Sans, Noto_Sans_JP } from "next/font/google";
+import { Providers } from "./providers";
 import "./globals.css";
 
-const geist = Geist({
-  variable: "--font-geist",
+const plusJakartaSans = Plus_Jakarta_Sans({
   subsets: ["latin"],
+  variable: "--font-display",
+});
+
+const notoSansJp = Noto_Sans_JP({
+  subsets: ["latin"],
+  variable: "--font-body",
 });
 
 export const metadata: Metadata = {
-  title: "BisSpa（ビジスペ）",
-  description: "自由に働くすべての人が、自分に合った場所を素早く見つけ、快適に仕事できるアプリ",
-  manifest: "/manifest.json",
+  title: "BisSpa",
+  description: "作業場所を直感的に探せるモバイル向けワークスペース検索アプリ",
 };
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  maximumScale: 1,
-  themeColor: "#2563eb",
+  viewportFit: "cover",
+  themeColor: "#e8f3ff",
 };
 
 export default function RootLayout({
@@ -27,9 +31,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ja" className={`${geist.variable} h-full antialiased`}>
-      <body className="h-full">
-        <SessionProvider>{children}</SessionProvider>
+    <html lang="ja">
+      <body className={`${plusJakartaSans.variable} ${notoSansJp.variable}`}>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

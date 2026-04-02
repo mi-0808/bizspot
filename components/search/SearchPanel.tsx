@@ -34,35 +34,33 @@ export function SearchPanel({
 
   return (
     <>
-      {/* オーバーレイ */}
       <div
-        className="fixed inset-0 bg-black/30 z-20"
+        className="fixed inset-0 z-30 bg-slate-950/20 backdrop-blur-[2px]"
         onClick={onClose}
         aria-hidden="true"
       />
 
-      {/* パネル本体 */}
-      <div className="fixed bottom-0 left-0 right-0 bg-white rounded-t-2xl z-30 shadow-2xl max-h-[80vh] overflow-y-auto">
-        {/* ドラッグハンドル */}
+      <div className="fixed bottom-0 left-0 right-0 z-40 max-h-[86vh] overflow-y-auto rounded-t-[32px] bg-white shadow-[0_-20px_60px_rgba(15,23,42,0.12)]">
         <div className="flex justify-center pt-3 pb-1">
-          <div className="w-10 h-1 bg-gray-300 rounded-full" />
+          <div className="h-1 w-12 rounded-full bg-sky-200" />
         </div>
 
-        <div className="px-5 pb-6 space-y-5">
+        <div className="space-y-6 px-5 pb-8">
           <div className="flex items-center justify-between">
-            <h2 className="text-lg font-bold text-gray-900">条件で絞り込む</h2>
+            <div>
+              <h2 className="text-xl font-black tracking-[-0.03em] text-slate-900">条件で探す</h2>
+              <p className="mt-1 text-sm text-slate-500">3秒で絞れるよう、基本条件と詳細条件を分けています。</p>
+            </div>
             <button
               type="button"
               onClick={onReset}
-              className="text-sm text-blue-600 hover:underline"
+              className="rounded-2xl bg-sky-50 px-3 py-2 text-sm font-semibold text-blue-700 transition hover:bg-sky-100"
             >
               リセット
             </button>
           </div>
 
           <PurposeFilter selected={filters.purposes} onToggle={onTogglePurpose} />
-
-          <hr className="border-gray-100" />
 
           <TimeFilter
             openNow={filters.openNow}
@@ -73,14 +71,12 @@ export function SearchPanel({
             onEndTimeChange={onSetEndTime}
           />
 
-          <hr className="border-gray-100" />
-
           <PriceFilterPanel selected={filters.prices} onToggle={onTogglePrice} />
 
           <button
             type="button"
             onClick={onClose}
-            className="w-full bg-blue-600 text-white py-3 rounded-xl font-semibold text-sm hover:bg-blue-700 transition-colors"
+            className="w-full rounded-[22px] bg-[linear-gradient(180deg,#3b82f6_0%,#2563eb_100%)] py-4 text-sm font-bold text-white shadow-[0_14px_34px_rgba(59,130,246,0.3)] transition hover:brightness-105"
           >
             {resultCount}件を表示
           </button>

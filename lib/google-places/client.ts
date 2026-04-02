@@ -10,7 +10,7 @@ import {
 } from "@/lib/utils/categoryColors";
 
 const PLACES_BASE = "https://maps.googleapis.com/maps/api/place";
-const API_KEY = process.env.GOOGLE_PLACES_API_KEY!;
+const API_KEY = process.env.GOOGLE_PLACES_API_KEY ?? "";
 
 // 検索対象のスペースタイプ
 const SEARCH_TYPES = ["cafe", "restaurant", "library"] as const;

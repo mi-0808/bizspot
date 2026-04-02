@@ -47,9 +47,10 @@ export async function GET(request: NextRequest) {
     const filtered = filterSpaces(spaces, filters);
     return NextResponse.json(filtered);
   } catch (err) {
-    console.error("[/api/places/nearby]", err);
+    const message = err instanceof Error ? err.message : "Unknown error";
+    console.error("[/api/places/nearby]", message, err);
     return NextResponse.json(
-      { error: "スペースの取得に失敗しました" },
+      { error: `スペースの取得に失敗しました: ${message}` },
       { status: 500 }
     );
   }

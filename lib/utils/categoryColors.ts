@@ -1,11 +1,11 @@
 import type { SpaceCategory } from "@/lib/types/space";
 
 export const CATEGORY_COLORS: Record<SpaceCategory, string> = {
-  cafe: "#FBBF24",         // 黄色
-  fast_food: "#EF4444",    // 赤
-  rental_space: "#22C55E", // 緑
-  coworking: "#6B7280",    // 灰色
-  library: "#3B82F6",      // 青
+  cafe: "#60A5FA",
+  fast_food: "#3B82F6",
+  rental_space: "#38BDF8",
+  coworking: "#1D4ED8",
+  library: "#93C5FD",
 };
 
 export const CATEGORY_LABELS: Record<SpaceCategory, string> = {

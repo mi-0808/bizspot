@@ -32,7 +32,7 @@ export function MapView({
           defaultZoom={15}
           mapId="bisspa-map"
           gestureHandling="greedy"
-          disableDefaultUI={false}
+          disableDefaultUI
           className="w-full h-full"
         >
           {spaces.map((space) => (

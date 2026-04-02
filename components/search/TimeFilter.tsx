@@ -20,8 +20,11 @@ export function TimeFilter({
   onEndTimeChange,
 }: Props) {
   return (
-    <div className="space-y-3">
-      <p className="text-sm font-semibold text-gray-700">時間</p>
+    <div className="space-y-4 rounded-[28px] border border-sky-100 bg-sky-50/70 p-4">
+      <div>
+        <p className="text-sm font-bold text-slate-900">詳細条件</p>
+        <p className="mt-1 text-xs text-slate-500">営業時間や使いたい時間帯まで細かく指定できます。</p>
+      </div>
       <Toggle
         checked={openNow}
         onChange={onOpenNowChange}
@@ -29,22 +32,22 @@ export function TimeFilter({
       />
       <div className="flex items-center gap-2">
         <div className="flex flex-col gap-1 flex-1">
-          <label className="text-xs text-gray-500">利用開始</label>
+          <label className="text-xs font-medium text-slate-500">利用開始</label>
           <input
             type="time"
             value={startTime}
             onChange={(e) => onStartTimeChange(e.target.value)}
-            className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="rounded-2xl border border-sky-100 bg-white px-3 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300"
           />
         </div>
-        <span className="text-gray-400 mt-4">〜</span>
+        <span className="mt-4 text-slate-400">〜</span>
         <div className="flex flex-col gap-1 flex-1">
-          <label className="text-xs text-gray-500">利用終了</label>
+          <label className="text-xs font-medium text-slate-500">利用終了</label>
           <input
             type="time"
             value={endTime}
             onChange={(e) => onEndTimeChange(e.target.value)}
-            className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="rounded-2xl border border-sky-100 bg-white px-3 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300"
           />
         </div>
       </div>
