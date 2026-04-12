@@ -3,8 +3,7 @@
 import Image from "next/image";
 import { useDeferredValue, useEffect, useMemo, useState } from "react";
 import { useSession } from "next-auth/react";
-import { SignInButton } from "@/components/auth/SignInButton";
-import { UserMenu } from "@/components/auth/UserMenu";
+import { AuthInlinePanel } from "@/components/auth/AuthInlinePanel";
 import { BizSpotBottomNav } from "@/components/navigation/BizSpotBottomNav";
 import { MapView } from "@/components/map/MapView";
 import { AppIcon } from "@/components/ui/AppIcon";
@@ -164,16 +163,19 @@ export function BisSpaMobileApp() {
         <div className="absolute inset-x-0 top-0 -z-10 h-[300px] bg-[radial-gradient(circle_at_top,rgba(186,230,253,0.85),transparent_58%),linear-gradient(180deg,rgba(255,255,255,0)_0%,rgba(255,255,255,0.5)_100%)]" />
 
         <header className="surface-soft sticky top-[max(env(safe-area-inset-top),12px)] z-30 rounded-[28px] px-4 py-3">
-          <div className="flex items-center justify-between gap-3">
-            <div>
-              <p className="text-[11px] font-semibold tracking-[0.2em] text-sky-700">BIZSPOT / LOCATION</p>
-              <h1 className="mt-1 text-[26px] font-semibold tracking-[-0.05em] text-slate-950">
+          <div className="min-w-0">
+            <p className="text-[10px] font-semibold tracking-[0.22em] text-sky-700">BIZSPOT / LOCATION</p>
+            <h1 className="mt-1 text-[22px] font-semibold tracking-[-0.05em] text-slate-950">
                 作業場所を、直感で。
-              </h1>
-            </div>
-            {session ? <UserMenu session={session} /> : <SignInButton label="ログイン" />}
+            </h1>
+            <p className="mt-1 text-sm text-slate-500">移動中でも片手で探しやすい、軽めの検索ビューです。</p>
           </div>
         </header>
+
+        <AuthInlinePanel
+          session={session}
+          signedOutLabel="保存・履歴・スコア投稿はログイン後に使えます。"
+        />
 
         <section className="surface-card mt-4 rounded-[32px] p-4">
           <div className="flex items-center gap-3 rounded-[24px] bg-sky-50/90 px-4 py-3">

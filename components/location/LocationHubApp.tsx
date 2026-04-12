@@ -2,8 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { useSession } from "next-auth/react";
-import { SignInButton } from "@/components/auth/SignInButton";
-import { UserMenu } from "@/components/auth/UserMenu";
+import { AuthInlinePanel } from "@/components/auth/AuthInlinePanel";
 import { BizSpotBottomNav } from "@/components/navigation/BizSpotBottomNav";
 import { useCurrentLocation } from "@/lib/hooks/useCurrentLocation";
 
@@ -181,7 +180,10 @@ export function MatchHubApp() {
     getCurrentLocation();
   }, [getCurrentLocation]);
 
-  const origin = lat !== null && lng !== null ? { lat, lng } : DEFAULT_CENTER;
+  const origin = useMemo(
+    () => (lat !== null && lng !== null ? { lat, lng } : DEFAULT_CENTER),
+    [lat, lng],
+  );
 
   const nearbyProfiles = useMemo(
     () =>
@@ -210,17 +212,14 @@ export function MatchHubApp() {
       <div className="absolute inset-x-0 top-0 -z-10 h-[360px] bg-[radial-gradient(circle_at_top,rgba(251,191,36,0.30),transparent_40%),radial-gradient(circle_at_top_right,rgba(59,130,246,0.18),transparent_28%),linear-gradient(180deg,rgba(255,255,255,0)_0%,rgba(255,255,255,0.7)_100%)]" />
 
       <header className="surface-soft rounded-[30px] px-4 py-4">
-        <div className="flex items-start justify-between gap-3">
-          <div>
-            <p className="text-[11px] font-semibold tracking-[0.22em] text-amber-700">BIZSPOT / MATCH</p>
-            <h1 className="mt-1 text-[28px] font-semibold tracking-[-0.05em] text-slate-950">
-              位置から、今つながれる相手を見つける
-            </h1>
-            <p className="mt-2 text-sm leading-6 text-slate-600">
-              近くにいる人を見るか、今出ている募集に反応するか。ヘビーに使えるように最短導線で置いています。
-            </p>
-          </div>
-          {session ? <UserMenu session={session} /> : <SignInButton label="参加する" />}
+        <div>
+          <p className="text-[10px] font-semibold tracking-[0.22em] text-amber-700">BIZSPOT / MATCH</p>
+          <h1 className="mt-1 text-[24px] font-semibold tracking-[-0.05em] text-slate-950">
+            位置から、今つながれる相手を見つける
+          </h1>
+          <p className="mt-2 text-sm leading-6 text-slate-600">
+            近くにいる人を見るか、今出ている募集に反応するか。視線を散らさず最短で使える並びにしています。
+          </p>
         </div>
 
         <div className="mt-4 flex gap-2 overflow-x-auto pb-1 hide-scrollbar">
@@ -229,6 +228,11 @@ export function MatchHubApp() {
           <MetaChip label="位置からつながる" tone="neutral" />
         </div>
       </header>
+
+      <AuthInlinePanel
+        session={session}
+        signedOutLabel="会いたい・投稿などのアクションはログイン後に使えます。"
+      />
 
       <section className="surface-card mt-4 rounded-[34px] p-4">
         <div className="flex gap-2 rounded-[24px] bg-slate-100 p-1">

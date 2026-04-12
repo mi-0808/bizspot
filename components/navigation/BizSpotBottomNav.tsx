@@ -4,12 +4,42 @@ import Link from "next/link";
 
 type NavTab = "location" | "match" | "profile";
 
+const NAV_ITEMS: Array<{
+  href: string;
+  label: string;
+  tab: NavTab;
+  icon: React.ReactNode;
+}> = [
+  { href: "/location", label: "Location", tab: "location", icon: <LocationIcon /> },
+  { href: "/match", label: "Match", tab: "match", icon: <MatchIcon /> },
+  { href: "/profile", label: "Profile", tab: "profile", icon: <ProfileIcon /> },
+];
+
 export function BizSpotBottomNav({ active }: { active: NavTab }) {
+  const activeIndex = NAV_ITEMS.findIndex((item) => item.tab === active);
+
   return (
-    <nav className="surface-card fixed inset-x-0 bottom-3 z-30 mx-auto flex w-[calc(100%-24px)] max-w-[406px] items-center gap-2 rounded-[28px] px-3 py-3">
-      <NavItem href="/location" label="Location" active={active === "location"} icon={<LocationIcon />} />
-      <NavItem href="/match" label="Match" active={active === "match"} icon={<MatchIcon />} />
-      <NavItem href="/profile" label="Profile" active={active === "profile"} icon={<ProfileIcon />} />
+    <nav className="fixed inset-x-0 bottom-3 z-30 mx-auto w-[calc(100%-24px)] max-w-[406px] rounded-[32px] border border-white/55 bg-white/58 p-2 shadow-[0_24px_60px_rgba(15,23,42,0.14)] backdrop-blur-[24px]">
+      <div className="relative grid grid-cols-3 gap-2">
+        <div
+          aria-hidden="true"
+          className="absolute bottom-0 top-0 rounded-[24px] border border-white/70 bg-[linear-gradient(180deg,rgba(255,255,255,0.78)_0%,rgba(219,234,254,0.56)_100%)] shadow-[0_16px_32px_rgba(148,163,184,0.22),inset_0_1px_0_rgba(255,255,255,0.7)] transition-transform duration-300 ease-out"
+          style={{
+            width: "calc((100% - 1rem) / 3)",
+            transform: `translateX(calc(${activeIndex} * (100% + 0.5rem)))`,
+          }}
+        />
+
+        {NAV_ITEMS.map((item) => (
+          <NavItem
+            key={item.tab}
+            href={item.href}
+            label={item.label}
+            active={item.tab === active}
+            icon={item.icon}
+          />
+        ))}
+      </div>
     </nav>
   );
 }
@@ -28,12 +58,16 @@ function NavItem({
   return (
     <Link
       href={href}
-      className={`flex flex-1 flex-col items-center justify-center rounded-[22px] px-3 py-3 text-center transition ${
-        active ? "bg-sky-600 text-white" : "text-slate-500 hover:bg-slate-50 hover:text-slate-700"
+      className={`relative z-10 flex min-h-[62px] flex-col items-center justify-center rounded-[24px] px-3 py-3 text-center transition-all duration-300 ${
+        active
+          ? "scale-[0.985] text-slate-950"
+          : "text-slate-500 hover:text-slate-700"
       }`}
     >
-      {icon}
-      <span className="mt-1 text-[11px] font-semibold">{label}</span>
+      <span className={`transition-transform duration-300 ${active ? "translate-y-[-1px]" : ""}`}>{icon}</span>
+      <span className={`mt-1 text-[11px] font-semibold transition-all duration-300 ${active ? "tracking-[0.02em]" : ""}`}>
+        {label}
+      </span>
     </Link>
   );
 }

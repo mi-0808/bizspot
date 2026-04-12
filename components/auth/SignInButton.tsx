@@ -5,19 +5,21 @@ import { signIn } from "next-auth/react";
 interface Props {
   className?: string;
   label?: string;
+  compact?: boolean;
 }
 
-export function SignInButton({ className, label = "ログイン" }: Props) {
+export function SignInButton({ className, label = "ログイン", compact = false }: Props) {
+  const defaultClassName = compact
+    ? "inline-flex items-center gap-2 rounded-full border border-white/60 bg-white/70 px-3.5 py-2 text-xs font-semibold text-slate-700 shadow-[0_10px_24px_rgba(15,23,42,0.08)] backdrop-blur-xl transition hover:bg-white/85"
+    : "flex items-center gap-2 rounded-2xl border border-sky-100 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-sky-50";
+
   return (
     <button
       type="button"
       onClick={() => signIn("google")}
-      className={
-        className ??
-        "flex items-center gap-2 rounded-2xl border border-sky-100 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-sky-50"
-      }
+      className={className ?? defaultClassName}
     >
-      <svg viewBox="0 0 24 24" className="w-4 h-4">
+      <svg viewBox="0 0 24 24" className={compact ? "h-3.5 w-3.5" : "h-4 w-4"}>
         <path
           fill="#4285F4"
           d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"
