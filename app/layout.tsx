@@ -14,8 +14,8 @@ const notoSansJp = Noto_Sans_JP({
 });
 
 export const metadata: Metadata = {
-  title: "BisSpa",
-  description: "作業場所を直感的に探せるモバイル向けワークスペース検索アプリ",
+  title: "BizSpot",
+  description: "ロケーションでスペースを探し、マッチで近くの人とつながれるビジネス向けモバイルアプリ",
 };
 
 export const viewport: Viewport = {

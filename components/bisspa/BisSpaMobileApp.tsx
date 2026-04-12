@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useDeferredValue, useEffect, useMemo, useState } from "react";
 import { useSession } from "next-auth/react";
 import { SignInButton } from "@/components/auth/SignInButton";
@@ -159,13 +160,13 @@ export function BisSpaMobileApp() {
 
   return (
     <>
-      <main className="app-shell px-3 pb-[calc(116px+env(safe-area-inset-bottom))] pt-[max(env(safe-area-inset-top),18px)]">
+      <main className="app-shell px-3 pb-[calc(132px+env(safe-area-inset-bottom))] pt-[max(env(safe-area-inset-top),18px)]">
         <div className="absolute inset-x-0 top-0 -z-10 h-[300px] bg-[radial-gradient(circle_at_top,rgba(186,230,253,0.85),transparent_58%),linear-gradient(180deg,rgba(255,255,255,0)_0%,rgba(255,255,255,0.5)_100%)]" />
 
         <header className="surface-soft sticky top-[max(env(safe-area-inset-top),12px)] z-30 rounded-[28px] px-4 py-3">
           <div className="flex items-center justify-between gap-3">
             <div>
-              <p className="text-[11px] font-semibold tracking-[0.2em] text-sky-700">BISSPA</p>
+              <p className="text-[11px] font-semibold tracking-[0.2em] text-sky-700">BIZSPOT</p>
               <h1 className="mt-1 text-[26px] font-semibold tracking-[-0.05em] text-slate-950">
                 作業場所を、直感で。
               </h1>
@@ -173,6 +174,71 @@ export function BisSpaMobileApp() {
             {session ? <UserMenu session={session} /> : <SignInButton label="ログイン" />}
           </div>
         </header>
+
+        <section className="surface-card mt-4 overflow-hidden rounded-[32px] bg-[linear-gradient(135deg,#fff7ed_0%,#ffffff_50%,#eff6ff_100%)] p-4">
+          <div className="absolute right-[-14px] top-[-18px] h-28 w-28 rounded-full bg-[radial-gradient(circle,rgba(251,191,36,0.24),rgba(255,255,255,0)_72%)]" />
+          <div className="relative">
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <p className="text-[11px] font-semibold tracking-[0.18em] text-amber-700">APP SWITCH</p>
+                <h2 className="mt-2 text-[24px] font-semibold tracking-[-0.04em] text-slate-950">
+                  ロケーションとマッチを、
+                  <br />
+                  ここで切り替える
+                </h2>
+                <p className="mt-2 max-w-[28ch] text-sm leading-6 text-slate-600">
+                  スペースを探すロケーションと、位置から人とつながるマッチをトップから選べるようにしました。
+                </p>
+              </div>
+              <Link
+                href="/apps"
+                className="rounded-[22px] bg-white px-4 py-3 text-sm font-semibold text-slate-700 shadow-sm"
+              >
+                一覧へ
+              </Link>
+            </div>
+
+            <div className="mt-4 grid gap-3">
+              <Link
+                href="/"
+                className="rounded-[26px] border border-sky-100 bg-[linear-gradient(135deg,#dbeafe_0%,#ffffff_68%)] p-4"
+              >
+                <div className="flex items-center justify-between gap-3">
+                  <div>
+                    <p className="text-[11px] font-semibold tracking-[0.18em] text-sky-700">LOCATION</p>
+                    <p className="mt-1 text-lg font-semibold tracking-[-0.03em] text-slate-950">ロケーション</p>
+                    <p className="mt-1 text-sm leading-6 text-slate-600">
+                      マップと条件検索で、近くの作業スポットを探す。
+                    </p>
+                  </div>
+                  <span className="rounded-full bg-slate-950 px-3 py-2 text-xs font-semibold text-white">現在表示中</span>
+                </div>
+              </Link>
+
+              <Link
+                href="/apps/location"
+                className="rounded-[26px] border border-amber-100 bg-[linear-gradient(135deg,#fef3c7_0%,#ffffff_68%)] p-4"
+              >
+                <div className="flex items-center justify-between gap-3">
+                  <div>
+                    <p className="text-[11px] font-semibold tracking-[0.18em] text-amber-700">MATCH</p>
+                    <p className="mt-1 text-lg font-semibold tracking-[-0.03em] text-slate-950">マッチ</p>
+                    <p className="mt-1 text-sm leading-6 text-slate-600">
+                      近くにいる人やハウリング投稿から、位置ベースで会話と交流を始める。
+                    </p>
+                  </div>
+                  <span className="rounded-full bg-slate-950 px-3 py-2 text-xs font-semibold text-white">交流へ</span>
+                </div>
+              </Link>
+            </div>
+
+            <div className="mt-3 flex gap-2 overflow-x-auto pb-1 hide-scrollbar">
+              <span className="rounded-full bg-sky-50 px-3 py-2 text-xs font-semibold text-sky-700">地図で探す</span>
+              <span className="rounded-full bg-amber-50 px-3 py-2 text-xs font-semibold text-amber-700">近所の人を距離順表示</span>
+              <span className="rounded-full bg-rose-50 px-3 py-2 text-xs font-semibold text-rose-700">ハウリングは最新順</span>
+            </div>
+          </div>
+        </section>
 
         <section className="surface-card mt-4 rounded-[32px] p-4">
           <div className="flex items-center gap-3 rounded-[24px] bg-sky-50/90 px-4 py-3">
@@ -349,7 +415,7 @@ export function BisSpaMobileApp() {
           )}
         </section>
 
-        <div className="surface-card fixed inset-x-0 bottom-3 z-30 mx-auto flex w-[calc(100%-24px)] max-w-[406px] items-center justify-between rounded-[28px] px-4 py-3">
+        <div className="surface-card fixed inset-x-0 bottom-3 z-30 mx-auto flex w-[calc(100%-24px)] max-w-[406px] items-center justify-between gap-2 rounded-[28px] px-3 py-3">
           <button
             type="button"
             onClick={() => setViewMode("map")}
@@ -378,6 +444,16 @@ export function BisSpaMobileApp() {
             <AppIcon name="focus" className="h-4 w-4" />
             一覧
           </button>
+          <Link
+            href="/apps/location"
+            className="flex flex-1 items-center justify-center gap-2 rounded-[22px] px-3 py-3 text-sm font-semibold text-amber-700 transition hover:bg-amber-50/70 hover:text-amber-800"
+          >
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="h-4 w-4">
+              <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 9.75h7.5M8.25 13.5h5.25" />
+              <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 18.75 3.75 21V6.75A2.25 2.25 0 0 1 6 4.5h12A2.25 2.25 0 0 1 20.25 6.75v8.25A2.25 2.25 0 0 1 18 17.25H8.156a2.25 2.25 0 0 0-1.406.494L6.75 18.75Z" />
+            </svg>
+            マッチ
+          </Link>
         </div>
       </main>
 
