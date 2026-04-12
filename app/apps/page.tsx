@@ -1,5 +1,5 @@
 import { BizSpotLauncher } from "@/components/launcher/BizSpotLauncher";
 
-export default function HomePage() {
+export default function AppsPage() {
   return <BizSpotLauncher />;
 }
