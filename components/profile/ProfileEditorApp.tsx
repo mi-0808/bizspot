@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { BizSpotBottomNav } from "@/components/navigation/BizSpotBottomNav";
 
 const STORAGE_KEY = "bizspot-profile";
@@ -24,19 +24,24 @@ const DEFAULT_PROFILE: ProfileDraft = {
 };
 
 export function ProfileEditorApp() {
-  const [profile, setProfile] = useState<ProfileDraft>(DEFAULT_PROFILE);
-  const [saved, setSaved] = useState(false);
+  const [profile, setProfile] = useState<ProfileDraft>(() => {
+    if (typeof window === "undefined") {
+      return DEFAULT_PROFILE;
+    }
 
-  useEffect(() => {
     const stored = window.localStorage.getItem(STORAGE_KEY);
-    if (!stored) return;
+    if (!stored) {
+      return DEFAULT_PROFILE;
+    }
 
     try {
-      setProfile(JSON.parse(stored) as ProfileDraft);
+      return JSON.parse(stored) as ProfileDraft;
     } catch {
       window.localStorage.removeItem(STORAGE_KEY);
+      return DEFAULT_PROFILE;
     }
-  }, []);
+  });
+  const [saved, setSaved] = useState(false);
 
   const handleSave = () => {
     window.localStorage.setItem(STORAGE_KEY, JSON.stringify(profile));

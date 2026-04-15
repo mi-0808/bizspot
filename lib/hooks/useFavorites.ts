@@ -1,7 +1,7 @@
 "use client";
 
 import useSWR from "swr";
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import type { Favorite } from "@/lib/types/favorites";
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json());
@@ -13,8 +13,8 @@ export function useFavorites() {
     { revalidateOnFocus: false }
   );
 
-  const favorites = data ?? [];
-  const favoriteIds = new Set(favorites.map((f) => f.placeId));
+  const favorites = useMemo(() => data ?? [], [data]);
+  const favoriteIds = useMemo(() => new Set(favorites.map((f) => f.placeId)), [favorites]);
 
   const addFavorite = useCallback(
     async (placeId: string, placeName: string, placeType: string | null) => {

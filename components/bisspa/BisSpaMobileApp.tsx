@@ -6,6 +6,7 @@ import { useSession } from "next-auth/react";
 import { AuthInlinePanel } from "@/components/auth/AuthInlinePanel";
 import { BizSpotBottomNav } from "@/components/navigation/BizSpotBottomNav";
 import { MapView } from "@/components/map/MapView";
+import { AdaptiveGlassHeader } from "@/components/ui/AdaptiveGlassHeader";
 import { AppIcon } from "@/components/ui/AppIcon";
 import { BisSpaDetailSheet } from "@/components/bisspa/BisSpaDetailSheet";
 import { useCurrentLocation } from "@/lib/hooks/useCurrentLocation";
@@ -162,15 +163,16 @@ export function BisSpaMobileApp() {
       <main className="app-shell px-3 pb-[calc(104px+env(safe-area-inset-bottom))] pt-[max(env(safe-area-inset-top),18px)]">
         <div className="absolute inset-x-0 top-0 -z-10 h-[300px] bg-[radial-gradient(circle_at_top,rgba(186,230,253,0.85),transparent_58%),linear-gradient(180deg,rgba(255,255,255,0)_0%,rgba(255,255,255,0.5)_100%)]" />
 
-        <header className="surface-soft sticky top-[max(env(safe-area-inset-top),12px)] z-30 rounded-[28px] px-4 py-3">
-          <div className="min-w-0">
-            <p className="text-[10px] font-semibold tracking-[0.22em] text-sky-700">BIZSPOT / LOCATION</p>
-            <h1 className="mt-1 text-[22px] font-semibold tracking-[-0.05em] text-slate-950">
-                作業場所を、直感で。
-            </h1>
-            <p className="mt-1 text-sm text-slate-500">移動中でも片手で探しやすい、軽めの検索ビューです。</p>
-          </div>
-        </header>
+        <AdaptiveGlassHeader
+          eyebrow="BIZSPOT / LOCATION"
+          title="作業場所を、直感で。"
+          description="移動中でも片手で探しやすい、軽めの検索ビューです。"
+          badges={[
+            { label: origin ? "現在地周辺" : "東京駅周辺", tone: "cool" },
+            { label: `${filteredSpaces.length}件を表示`, tone: "neutral" },
+            { label: locationLoading || spacesLoading ? "検索を更新中" : "すぐ検索可能", tone: "warm" },
+          ]}
+        />
 
         <AuthInlinePanel
           session={session}
@@ -221,11 +223,6 @@ export function BisSpaMobileApp() {
             </button>
           </div>
 
-          <div className="mt-4 flex gap-2 overflow-x-auto pb-1 hide-scrollbar">
-            <InfoPill icon="pin" label={origin ? "現在地周辺" : "東京駅周辺"} />
-            <InfoPill icon="spark" label={`${filteredSpaces.length}件を表示`} />
-            <InfoPill icon="clock" label={locationLoading || spacesLoading ? "検索を更新中" : "すぐ検索可能"} />
-          </div>
         </section>
 
         <section className="mt-4 flex items-center gap-2 rounded-[24px] bg-white/70 p-1 shadow-[0_16px_36px_rgba(15,23,42,0.06)]">
@@ -755,21 +752,6 @@ function SegmentButton({
 function FilterBadge({ label }: { label: string }) {
   return (
     <div className="rounded-full bg-sky-50 px-3 py-2 text-xs font-semibold text-sky-700">
-      {label}
-    </div>
-  );
-}
-
-function InfoPill({
-  icon,
-  label,
-}: {
-  icon: React.ComponentProps<typeof AppIcon>["name"];
-  label: string;
-}) {
-  return (
-    <div className="flex items-center gap-2 rounded-full bg-white px-3 py-2 text-xs font-semibold text-slate-600 shadow-sm">
-      <AppIcon name={icon} className="h-4 w-4 text-sky-700" />
       {label}
     </div>
   );
