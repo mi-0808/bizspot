@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { BrandLogo } from "@/components/brand/BrandLogo";
 
 const APP_CARDS = [
   {
@@ -37,16 +38,16 @@ export function BizSpotLauncher() {
         <div className="absolute left-[-10px] bottom-[-24px] h-32 w-32 rounded-full bg-[radial-gradient(circle,rgba(56,189,248,0.22),rgba(255,255,255,0)_72%)]" />
 
         <div className="relative">
-          <div className="flex items-center gap-2">
-            <span className="rounded-full bg-white/85 px-3 py-1.5 text-[11px] font-semibold tracking-[0.22em] text-slate-500 shadow-sm">
-              BIZSPOT
-            </span>
+          <div className="flex items-center justify-between gap-3">
+            <div className="rounded-[24px] border border-white/80 bg-white/88 px-4 py-3 shadow-sm backdrop-blur">
+              <BrandLogo />
+            </div>
             <span className="rounded-full bg-slate-950 px-3 py-1.5 text-[11px] font-semibold text-white">
               Location / Match
             </span>
           </div>
 
-          <h1 className="mt-3 text-[30px] font-semibold tracking-[-0.06em] text-slate-950 sm:text-[32px]">
+          <h1 className="mt-4 text-[30px] font-semibold tracking-[-0.06em] text-slate-950 sm:text-[32px]">
             目的に合わせて、
             <br />
             体験を選ぶ

@@ -16,6 +16,12 @@ const notoSansJp = Noto_Sans_JP({
 export const metadata: Metadata = {
   title: "BizSpot",
   description: "ロケーションでスペースを探し、マッチで近くの人とつながれるビジネス向けモバイルアプリ",
+  manifest: "/manifest.webmanifest",
+  appleWebApp: {
+    capable: true,
+    title: "BizSpot",
+    statusBarStyle: "black-translucent",
+  },
 };
 
 export const viewport: Viewport = {

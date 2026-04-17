@@ -17,10 +17,10 @@ export function BrandLogo({ compact = false }: Props) {
       {!compact && (
         <div className="min-w-0">
           <p className="text-[1.05rem] font-black leading-none tracking-[-0.04em] text-slate-900">
-            Bizspot
+            BizSpot
           </p>
           <p className="mt-1 text-[11px] font-medium uppercase tracking-[0.18em] text-sky-700/80">
-            Bizspo
+            Location & Match
           </p>
         </div>
       )}
